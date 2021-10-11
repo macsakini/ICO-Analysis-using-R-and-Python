@@ -1,0 +1,7 @@
+"0","rand_x = na.omit(data_x)"
+"0","rand_x = rand_x[!is.infinite(rowSums(rand_x)),]"
+"0",""
+"0","# Basic density"
+"0","ggplot(rand_x, aes(x = SIMS)) + geom_histogram(aes(y=..density..), colour=""black"", fill=""white"")+"
+"0","  geom_density(color=""darkblue"", fill=""lightblue"") + geom_vline(aes(xintercept=mean(SIMS)),"
+"0","            color=""blue"", linetype=""dashed"", size=1)"

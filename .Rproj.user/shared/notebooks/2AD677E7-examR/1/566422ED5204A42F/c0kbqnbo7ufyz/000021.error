@@ -1,0 +1,1 @@
+{"frames":[{"func":"monthly_loan_payments(12, 23, 23, 4)","file":"","line_number":0,"end_line_number":0,"character_number":0,"end_character_number":0}],"message":"Error in if (L == NA & m == NA) { : missing value where TRUE/FALSE needed\n"}

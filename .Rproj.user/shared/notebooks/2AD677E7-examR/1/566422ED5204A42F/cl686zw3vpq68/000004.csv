@@ -1,0 +1,3 @@
+"0","function(12) sample(c(1,2,5,7),n,replace=T)"
+"2","Error: unexpected numeric constant in ""function(12""
+"

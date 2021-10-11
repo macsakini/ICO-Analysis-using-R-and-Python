@@ -1,0 +1,14 @@
+"0","#Import dataset"
+"0","library(readr)"
+"0","data <- read_csv(""data2.csv"")"
+"2","
+[36m--[39m [1m[1mColumn specification[1m[22m [36m---------------------------------------------------------------------------[39m
+cols(
+  GRIP = [32mcol_double()[39m,
+  ARM = [32mcol_double()[39m,
+  RATINGS = [32mcol_double()[39m,
+  SIMS = [32mcol_double()[39m
+)
+
+"
+"0","head(data)"

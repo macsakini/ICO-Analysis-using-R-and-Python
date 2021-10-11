@@ -1,0 +1,28 @@
+{
+    "id": "61B9E273",
+    "path": "C:/Users/HP/Downloads/examR.Rmd",
+    "project_path": null,
+    "type": "r_markdown",
+    "hash": "0",
+    "contents": "",
+    "dirty": true,
+    "created": 1632507186340.0,
+    "source_on_save": false,
+    "relative_order": 6,
+    "properties": {
+        "tempName": "Untitled1",
+        "chunk_output_type": "inline",
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "31,1",
+        "scrollLine": "18"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1632508624,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1632510948140,
+    "read_only": false,
+    "read_only_alternatives": []
+}

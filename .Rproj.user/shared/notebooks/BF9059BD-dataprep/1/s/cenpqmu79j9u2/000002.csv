@@ -1,0 +1,3 @@
+"0","ggplot(rand_x, aes(x = RATINGS)) + geom_histogram(aes(y=..density..), colour=""black"", fill=""white"")+"
+"0","  geom_density(color=""darkblue"", fill=""lightblue"") + geom_vline(aes(xintercept=mean(RATINGS)),"
+"0","            color=""blue"", linetype=""dashed"", size=1)"

@@ -1,0 +1,40 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+```{r}
+#Question 2
+euler_polyhedron = function(vertices, edges, faces){
+  if(vertices + edges - faces == 2){
+        print("True")
+  }else{
+    print("False")
+  }  
+}
+
+euler_polyhedron(2,3,4)
+```
+
+```{r}
+monthly_loan_payments = function(L,m,p,N){
+  if(L == NA & m == NA){ print("Both m and L are NA")}
+  else if(m == NULL){
+    m = ((p/1200*(1+(p/1200))^N) / (((1+(p/1200))^N) - 1))*L
+  }else if(L == NULL){
+    L = m /((p/1200*(1+(p/1200))^N) / (((1+(p/1200))^N) - 1))
+  }else{
+    a = p/1200*(1+(p/1200))^N
+    b = ((1+(p/1200))^N) - 1
+    if(m /(a / b) == (a / b)*L){
+      print(TRUE)
+    }else{ print(FALSE)}
+  }
+}
+monthly_loan_payments(12,23,23,4)
+```
+
+```{r}
+x = function(n) sample(c(1,2,5,7),n,replace=T)
+
+```
+

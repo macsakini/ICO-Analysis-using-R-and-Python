@@ -1,0 +1,127 @@
+---
+title: "R Notebook"
+output: word_document
+---
+```{r}
+#Install packages here
+```
+
+```{r}
+#import libraries
+library(tidyverse)
+library(tidyr)
+library(dplyr)
+library(forecast)
+library(broom)
+library(ggplot2)
+library(stargazer)
+library(mltools)
+library(data.table)
+library(caret)
+library(fitdistrplus)
+library("Hmisc")
+```
+
+```{r}
+#Import dataset
+library(readr)
+data <- read_csv("data2.csv")
+head(data)
+```
+```{r}
+#Create new variables that will be used
+#Log form of token number
+#Count of categories
+#Count of supported currecies
+
+
+data_x = data %>%
+  mutate(log_ratings = log(RATINGS))
+#data_x = na.omit(data_x)
+#data_x = data_x
+
+head(data_x)
+```
+```{r}
+
+```
+```{r}
+#Get unique variables and their count
+cat("The platofrms used:", length(unique(data$GRIP)))
+cat("\n")
+cat("The total number of countries:", length(unique(data$ARM)))
+cat("\n")
+cat("The total number of token types is: ", length(unique(data$SIMS)))
+```
+
+```{r}
+#Getting Summary descriptive statistics of some key variables 
+
+summary(data_x)  
+```
+```{r}
+#Fitting and plotting distributions on some variables using Maximum Likelihood Estimation (MLE)
+# Log Normal distribution would be mostly targetted towards 
+
+descdistribution <- function(data){
+  x = na.omit(data)
+  x = x[!is.infinite((x))]
+  x <- x[x > 0]
+  desc = descdist(x, boot = 1000)
+  print(summary(desc))
+}
+
+descdistribution(data_x$GRIP)
+```
+```{r}
+
+range01 <- function(x){(x-min(x))/(max(x)-min(x))}
+
+fitdistribution <- function(data){
+  x <- data[data > 0]
+  x = na.omit(x)
+  x = x[!is.infinite((x))]
+  fit <- fitdist(x, "logis")
+  print(summary(fit))
+  plot(fit)
+  
+}
+
+fitdistribution(data_x$SIMS)
+```
+
+
+```{r}
+rand_x = na.omit(data_x)
+rand_x = rand_x[!is.infinite(rowSums(rand_x)),]
+
+# Basic density
+ggplot(rand_x, aes(x = SIMS)) + geom_histogram(aes(y=..density..), colour="black", fill="white")+
+  geom_density(color="darkblue", fill="lightblue") + geom_vline(aes(xintercept=mean(SIMS)),
+            color="blue", linetype="dashed", size=1)
+```
+```{r}
+
+ggplot(rand_x, aes(x = GRIP)) + geom_histogram(aes(y=..density..), colour="black", fill="white")+
+  geom_density(color="darkblue", fill="lightblue") + geom_vline(aes(xintercept=mean(GRIP)),
+            color="blue", linetype="dashed", size=1)
+```
+-
+```{r}
+ggplot(rand_x, aes(x = ARM)) + geom_histogram(aes(y=..density..), colour="black", fill="white")+
+  geom_density(color="darkblue", fill="lightblue") + geom_vline(aes(xintercept=mean(ARM)),
+            color="blue", linetype="dashed", size=1)
+```
+```{r}
+ggplot(rand_x, aes(x = RATINGS)) + geom_histogram(aes(y=..density..), colour="black", fill="white")+
+  geom_density(color="darkblue", fill="lightblue") + geom_vline(aes(xintercept=mean(RATINGS)),
+            color="blue", linetype="dashed", size=1)
+```
+```{r}
+corr_matrix <- rcorr(as.matrix(rand_x))
+corr_matrix
+```
+```{r}
+
+```
+

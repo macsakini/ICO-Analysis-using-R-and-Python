@@ -1,0 +1,73 @@
+---
+title: "Data Analysis"
+output: word_document
+---
+```{r}
+library(Amelia)
+#import libraries
+library(tidyverse)
+library(tidyr)
+library(dplyr)
+library(forecast)
+library(broom)
+library(ggplot2)
+library(stargazer)
+library(mltools)
+library(data.table)
+library(caret)
+library(fitdistrplus)
+library(Hmisc)
+```
+
+```{r}
+library(readr)
+data2 <- read_csv("data.csv", col_types = cols(enddate = col_date(format = "%d/%m/%Y"), 
+    startdate = col_date(format = "%d/%m/%Y")))
+
+data2$tokenNum = ifelse(is.na(data2$tokenNum),ave(data2$tokenNum, FUN = function(x) mean(x, na.rm = 'TRUE')),data2$tokenNum)
+
+data_x = data2 %>%
+  dplyr::mutate(logtokennumber = log(tokenNum), 
+         categorycount = sapply(as.list(strsplit(categories,",")),length), 
+         duration = as.numeric(enddate - startdate),
+         currencycount = sapply(as.list(strsplit(acceptingCurrency,",")),length)
+  )
+```
+
+```{r}
+sapply(data_x,function(x) sum(is.na(x)))
+```
+```{r}
+sapply(data_x, function(x) length(unique(x)))
+```
+
+```{r}
+missmap(data_x, main = "Missing values vs observed")
+```
+```{r}
+data_x = data_x[!is.na(data_x$video),]
+data_x = data_x[!is.na(data_x$duration),]
+sapply(data_x,function(x) sum(is.na(x)))
+```
+
+```{r}
+modeldata = data_x %>%
+  dplyr::select(-c(offered_ownership, tokenName, tokenType, platform, acceptingCurrency, categories, tokenPrice, startdate, enddate,country ))
+modeldata = modeldata[!is.infinite(rowSums(modeldata)),]
+```
+
+```{r}
+model <- glm(success ~.,family=binomial(link='logit'),data=modeldata)
+summary(model)
+stargazer(model)
+```
+
+```{r}
+anova(model, test="Chisq")
+```
+
+```{r}
+library(pscl)
+pR2(model)
+```
+

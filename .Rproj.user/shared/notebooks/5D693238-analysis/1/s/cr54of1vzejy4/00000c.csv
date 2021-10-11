@@ -1,0 +1,4 @@
+"0","missmap(data_x, main = ""Missing values vs observed"")"
+"2","Error in missmap(data_x, main = ""Missing values vs observed"") : 
+  could not find function ""missmap""
+"
